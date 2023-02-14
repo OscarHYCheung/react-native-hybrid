@@ -1,5 +1,6 @@
 package com.reactnativehybrid
 
+import android.os.Bundle
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.concurrentReactEnabled
@@ -27,5 +28,9 @@ class MainActivity : ReactActivity() {
             // If you opted-in for the New Architecture, we enable Concurrent React (i.e. React 18).
             concurrentReactEnabled // concurrentRootEnabled
         )
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(null)
     }
 }
