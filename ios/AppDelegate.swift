@@ -14,6 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     self.window = UIWindow(frame: UIScreen.main.bounds)
     self.window?.rootViewController = rootViewController
     self.window?.makeKeyAndVisible()
+
+    RNSplashScreen.show()
   
     return true
   }

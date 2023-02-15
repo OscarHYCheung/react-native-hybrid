@@ -6,8 +6,9 @@ import HomeScreen from './src/screens/HomeScreen';
 const Stack = createNativeStackNavigator();
 const App = () => (
   <NavigationContainer>
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="Home">
       <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Detail" component={HomeScreen} />
     </Stack.Navigator>
   </NavigationContainer>
 );

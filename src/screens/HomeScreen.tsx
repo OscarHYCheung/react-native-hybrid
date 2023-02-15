@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import type { PropsWithChildren } from 'react';
 import {
@@ -17,6 +17,7 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import SplashScreen from 'react-native-splash-screen';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -67,29 +68,40 @@ const Section = ({ children, title }: SectionProps): JSX.Element => {
   );
 };
 
-const HomeScreen = (): JSX.Element => (
-  <SafeAreaView>
-    <StatusBar />
-    <ScrollView contentInsetAdjustmentBehavior="automatic">
-      <Header />
-      <View>
-        <Section title="Step One">
-          Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-          screen and then come back to see your edits.
-        </Section>
-        <Section title="See Your Changes">
-          <ReloadInstructions />
-        </Section>
-        <Section title="Debug">
-          <DebugInstructions />
-        </Section>
-        <Section title="Learn More">
-          Read the docs to discover what to do next:
-        </Section>
-        <LearnMoreLinks />
-      </View>
-    </ScrollView>
-  </SafeAreaView>
-);
+const HomeScreen = (): JSX.Element => {
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      SplashScreen.hide();
+    }, 2000);
+    return () => {
+      clearTimeout(timeoutId);
+    }
+  });
+
+  return (
+    <SafeAreaView>
+      <StatusBar />
+      <ScrollView contentInsetAdjustmentBehavior="automatic">
+        <Header />
+        <View>
+          <Section title="Step One">
+            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
+            screen and then come back to see your edits.
+          </Section>
+          <Section title="See Your Changes">
+            <ReloadInstructions />
+          </Section>
+          <Section title="Debug">
+            <DebugInstructions />
+          </Section>
+          <Section title="Learn More">
+            Read the docs to discover what to do next:
+          </Section>
+          <LearnMoreLinks />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
 
 export default HomeScreen;
