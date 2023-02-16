@@ -15,9 +15,15 @@ const WebViewScreen = (): JSX.Element => {
     // paddingBottom: insets.bottom,
     // Can directly set as paddings, or pass to components / WebView content if needed
   }
+  const injectScript = `
+    window.mobileApp = { version: '1.0.0' };
+  `;
   return (
     <View style={wrapperStyle}>
-      <WebView source={{ uri: webViewContentUrl }} onMessage={() => { }} />
+      <WebView
+        source={{ uri: webViewContentUrl }}
+        onMessage={() => { }}
+        injectedJavaScriptBeforeContentLoaded={injectScript} />
     </View>
   );
 }
