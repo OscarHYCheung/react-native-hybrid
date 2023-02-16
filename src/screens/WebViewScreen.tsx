@@ -7,6 +7,7 @@ import WebView from 'react-native-webview';
 import type { WebViewMessageEvent } from 'react-native-webview/lib/WebViewTypes';
 import parseQueryString from '../utils/parseQueryString';
 
+
 const WebViewScreen = (): JSX.Element => {
   const insets = useSafeAreaInsets()
 
