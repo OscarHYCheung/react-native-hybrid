@@ -17,7 +17,7 @@ const HomeScreen = (): JSX.Element => {
   const webViewContentUrl = 'https://oscarhycheung.github.io/react-native-hybrid-webview-content/';
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <WebView source={{ uri: webViewContentUrl }} />
+      <WebView source={{ uri: webViewContentUrl }} onMessage={() => { }} />
     </SafeAreaView>
   );
 }
