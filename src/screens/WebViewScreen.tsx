@@ -5,7 +5,7 @@ import { View } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import WebView from 'react-native-webview';
 
-const HomeScreen = (): JSX.Element => {
+const WebViewScreen = (): JSX.Element => {
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       SplashScreen.hide();
@@ -32,4 +32,4 @@ const HomeScreen = (): JSX.Element => {
   );
 }
 
-export default HomeScreen;
+export default WebViewScreen;
