@@ -1,14 +1,15 @@
 import React from 'react';
-
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Linking, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import WebView from 'react-native-webview';
 
-import type { WebViewMessageEvent } from 'react-native-webview/lib/WebViewTypes';
 import parseQueryString from '../utils/parseQueryString';
+import BaseScreenProps from '../types/BaseScreenProps';
+
+import type { WebViewMessageEvent } from 'react-native-webview/lib/WebViewTypes';
 
 
-const WebViewScreen = (): JSX.Element => {
+const WebViewScreen = ({ navigation }: BaseScreenProps): JSX.Element => {
   const insets = useSafeAreaInsets()
 
   const webViewContentUrl = 'https://oscarhycheung.github.io/react-native-hybrid-webview-content/';
@@ -30,6 +31,10 @@ const WebViewScreen = (): JSX.Element => {
           break;
         }
         Linking.openURL(params.url);
+        break;
+      }
+      case 'goBack': {
+        navigation.goBack();
         break;
       }
       default: {

@@ -14,7 +14,7 @@ import {
 import SplashScreen from 'react-native-splash-screen';
 
 import GoToWebViewScreenButton from '../components/GoToWebViewScreenButton';
-import HomePageSection from '../components/HomePageSection';
+import HomePageSection from '../components/HomeScreenSection';
 
 
 const HomeScreen = (): JSX.Element => {
