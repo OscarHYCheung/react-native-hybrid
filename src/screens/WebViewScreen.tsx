@@ -1,20 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { View } from 'react-native';
-import SplashScreen from 'react-native-splash-screen';
 import WebView from 'react-native-webview';
 
 const WebViewScreen = (): JSX.Element => {
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      SplashScreen.hide();
-    }, 2000);
-    return () => {
-      clearTimeout(timeoutId);
-    }
-  });
-
   const webViewContentUrl = 'https://oscarhycheung.github.io/react-native-hybrid-webview-content/';
   const insets = useSafeAreaInsets()
   const wrapperStyle = {
