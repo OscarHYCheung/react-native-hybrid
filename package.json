@@ -7,13 +7,15 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "webview-content-server": "http-server ./webview-content/ -p8080 -c-1"
   },
   "dependencies": {
     "@react-navigation/native": "^6.1.4",
     "@react-navigation/native-stack": "^6.9.10",
     "react": "18.2.0",
     "react-native": "0.71.2",
+    "react-native-device-info": "^10.4.0",
     "react-native-safe-area-context": "^4.5.0",
     "react-native-screens": "^3.20.0",
     "react-native-splash-screen": "^3.3.0",
@@ -30,8 +32,11 @@
     "@types/react-test-renderer": "^18.0.0",
     "babel-jest": "^29.2.1",
     "eslint": "^8.19.0",
+    "http-server": "^14.1.1",
+    "i": "^0.3.7",
     "jest": "^29.2.1",
     "metro-react-native-babel-preset": "0.73.7",
+    "npm": "^9.5.0",
     "react-test-renderer": "18.2.0",
     "typescript": "4.8.4"
   },

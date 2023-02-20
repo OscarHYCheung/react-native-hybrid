@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { Linking, StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Linking, Platform, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import DeviceInfo from 'react-native-device-info';
 import WebView from 'react-native-webview';
 
 import BaseScreenProps from '../types/BaseScreenProps';
@@ -10,11 +11,24 @@ import LoggerModule from '../react-native-modules/LoggerModule';
 import RandomModule from '../react-native-modules/RandomModule';
 
 
+
 const WebViewScreen = ({ navigation }: BaseScreenProps): JSX.Element => {
   const [isLoading, setIsLoading] = useState(true);
+  const [webViewUrl, setWebViewUrl] = useState('');
   const insets = useSafeAreaInsets()
 
-  const webViewContentUrl = 'https://oscarhycheung.github.io/react-native-hybrid-webview-content/';
+  useEffect(() => {
+    DeviceInfo.isEmulator().then((isInEmulator) => {
+      let url;
+      if (isInEmulator) {
+        const host = Platform.OS === 'android' ? '10.0.2.2' : 'localhost';
+        url = `http://${host}:8080/`;
+      } else {
+        url = 'https://oscarhycheung.github.io/react-native-hybrid-webview-content/';
+      }
+      setWebViewUrl(url);
+    });
+  }, []);
 
   const handleOnMessage = async (event: WebViewMessageEvent) => {
     const messageStr = event?.nativeEvent?.data || '';
@@ -118,11 +132,13 @@ const WebViewScreen = ({ navigation }: BaseScreenProps): JSX.Element => {
       ]}>
         <Text>Loading WebView Content...</Text>
       </View>
-      <WebView
-        source={{ uri: webViewContentUrl }}
-        onMessage={handleOnMessage}
-        injectedJavaScriptBeforeContentLoaded={injectScript}
-        onLoadEnd={() => setIsLoading(false)} />
+      {
+        webViewUrl && <WebView
+          source={{ uri: webViewUrl }}
+          onMessage={handleOnMessage}
+          injectedJavaScriptBeforeContentLoaded={injectScript}
+          onLoadEnd={() => setIsLoading(false)} />
+      }
     </View>
   );
 }
