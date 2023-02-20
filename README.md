@@ -17,9 +17,10 @@ Hybrid Android and iOS React Native app with WebView
 
 ## Get started
 
-- In project base folder, run `yarn install`
-- In folder `ios`, run `pod install`
-- Back to project base folder, run `yarn ios` or `yarn android` to build the app
+- Get into project base folder
+- Run `yarn install`
+- Run `yarn pod-install`
+- Then run `yarn ios` or `yarn android` to build the app
 
 ## Message passing from WebView content to React Native
 
