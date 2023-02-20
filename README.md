@@ -11,6 +11,15 @@ Hybrid Android and iOS React Native app with WebView
 - Node.js 18.14.0, `nvm install 18.14.0 && nvm alias default 18.14.0`
 - Watch, `brew install watchman`
 - Open JDK 11, `brew tap homebrew/cask-versions && brew install --cask zulu11`
+- CocoaPods, `rvm use 2.7.6 && gem install cocoapods`
+- Xcode tools installed
+- Ensure all paths are set correctly, i.e. RVM, NVM, JDK, CocoaPods, Android home, etc.
+
+## Get started
+
+- In project base folder, run `yarn install`
+- In folder `ios`, run `pod install`
+- Back to project base folder, run `yarn ios` or `yarn android` to build the app
 
 ## React Native modules
 
