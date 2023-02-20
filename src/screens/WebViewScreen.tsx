@@ -3,7 +3,6 @@ import { Linking, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import WebView from 'react-native-webview';
 
-import parseQueryString from '../utils/parseQueryString';
 import BaseScreenProps from '../types/BaseScreenProps';
 
 import type { WebViewMessageEvent } from 'react-native-webview/lib/WebViewTypes';
@@ -19,34 +18,38 @@ const WebViewScreen = ({ navigation }: BaseScreenProps): JSX.Element => {
 
   const handleOnMessage = async (event: WebViewMessageEvent) => {
     const messageStr = event?.nativeEvent?.data || '';
-    const parts = messageStr.split('|');
-    if (parts.length < 1) {
+
+    let action;
+    let params;
+    try {
+      const message = JSON.parse(messageStr)
+      action = message.action;
+      params = message.params || {};
+    } catch (error) {
+      console.error('Cannot parse message', error);
+    }
+
+    if (!action) {
       return;
     }
 
-    const action = parts[0];
-    const params = parseQueryString(parts[1]);
-
     switch (action) {
-      case 'openUrl': {
-        // Usage: openUrl|url=https://www.google.com/
+      case 'open-url': {
         if (!params.url) {
           break;
         }
         try {
           await Linking.openURL(params.url);
         } catch (error) {
-          console.error('Error occured in openUrl:', error);
+          console.error('Error occurred in openUrl:', error);
         }
         break;
       }
-      case 'goBack': {
-        // Usage: goBack
+      case 'go-back': {
         navigation.goBack();
         break;
       }
-      case 'logToNative': {
-        // Usage: logToNative|message=TestingNativeLogger
+      case 'log-to-native': {
         let message = params.message;
         if (typeof message !== 'string') {
           return;
@@ -60,24 +63,22 @@ const WebViewScreen = ({ navigation }: BaseScreenProps): JSX.Element => {
         LoggerModule.log(params.message);
         break;
       }
-      case 'randSync': {
-        // Usage: randSync
+      case 'rand-sync': {
         const randFloat = RandomModule.randSync();
         console.log(`randSync returned: ${randFloat}`);
         break;
       }
-      case 'rand': {
-        // Usage: rand
+      case 'rand-async': {
         try {
           const randFloat = await RandomModule.rand();
           console.log(`rand returned: ${randFloat}`);
         } catch (error) {
-          console.error('Error occured in rand:', error);
+          console.error('Error occurred in rand:', error);
         }
         break;
       }
       default: {
-        console.error(`Unknonw message: ${messageStr}`);
+        console.error(`Unknown message: ${messageStr}`);
         break;
       }
     }
