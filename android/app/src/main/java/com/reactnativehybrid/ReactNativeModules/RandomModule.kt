@@ -1,5 +1,6 @@
 package com.reactnativehybrid.ReactNativeModules
 
+import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
@@ -14,5 +15,14 @@ class RandomModule(reactContext: ReactApplicationContext) :
     override fun getName() = moduleName
 
     @ReactMethod(isBlockingSynchronousMethod = true)
-    fun rand() = Random.nextFloat()
+    fun randSync() = Random.nextFloat()
+
+    @ReactMethod
+    fun rand(promise: Promise) {
+        try {
+            promise.resolve(Random.nextFloat())
+        } catch (e: Throwable) {
+            promise.reject("Error occurred", e)
+        }
+    }
 }

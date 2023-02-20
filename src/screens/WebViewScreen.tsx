@@ -8,6 +8,7 @@ import BaseScreenProps from '../types/BaseScreenProps';
 
 import type { WebViewMessageEvent } from 'react-native-webview/lib/WebViewTypes';
 import LoggerModule from '../react-native-modules/LoggerModule';
+import RandomModule from '../react-native-modules/RandomModule';
 
 
 const WebViewScreen = ({ navigation }: BaseScreenProps): JSX.Element => {
@@ -16,9 +17,8 @@ const WebViewScreen = ({ navigation }: BaseScreenProps): JSX.Element => {
 
   const webViewContentUrl = 'https://oscarhycheung.github.io/react-native-hybrid-webview-content/';
 
-  const handleOnMessage = (event: WebViewMessageEvent) => {
+  const handleOnMessage = async (event: WebViewMessageEvent) => {
     const messageStr = event?.nativeEvent?.data || '';
-    console.log(messageStr);
     const parts = messageStr.split('|');
     if (parts.length < 1) {
       return;
@@ -33,7 +33,11 @@ const WebViewScreen = ({ navigation }: BaseScreenProps): JSX.Element => {
         if (!params.url) {
           break;
         }
-        Linking.openURL(params.url);
+        try {
+          await Linking.openURL(params.url);
+        } catch (error) {
+          console.error('Error occured in openUrl:', error);
+        }
         break;
       }
       case 'goBack': {
@@ -56,7 +60,24 @@ const WebViewScreen = ({ navigation }: BaseScreenProps): JSX.Element => {
         LoggerModule.log(params.message);
         break;
       }
+      case 'randSync': {
+        // Usage: randSync
+        const randFloat = RandomModule.randSync();
+        console.log(`randSync returned: ${randFloat}`);
+        break;
+      }
+      case 'rand': {
+        // Usage: rand
+        try {
+          const randFloat = await RandomModule.rand();
+          console.log(`rand returned: ${randFloat}`);
+        } catch (error) {
+          console.error('Error occured in rand:', error);
+        }
+        break;
+      }
       default: {
+        console.error(`Unknonw message: ${messageStr}`);
         break;
       }
     }
