@@ -7,6 +7,7 @@ import parseQueryString from '../utils/parseQueryString';
 import BaseScreenProps from '../types/BaseScreenProps';
 
 import type { WebViewMessageEvent } from 'react-native-webview/lib/WebViewTypes';
+import LoggerModule from '../react-native-modules/LoggerModule';
 
 
 const WebViewScreen = ({ navigation }: BaseScreenProps): JSX.Element => {
@@ -28,6 +29,7 @@ const WebViewScreen = ({ navigation }: BaseScreenProps): JSX.Element => {
 
     switch (action) {
       case 'openUrl': {
+        // Usage: openUrl|url=https://www.google.com/
         if (!params.url) {
           break;
         }
@@ -35,7 +37,23 @@ const WebViewScreen = ({ navigation }: BaseScreenProps): JSX.Element => {
         break;
       }
       case 'goBack': {
+        // Usage: goBack
         navigation.goBack();
+        break;
+      }
+      case 'logToNative': {
+        // Usage: logToNative|message=TestingNativeLogger
+        let message = params.message;
+        if (typeof message !== 'string') {
+          return;
+        }
+
+        message = message.trim();
+        if (!message.length) {
+          return;
+        }
+
+        LoggerModule.log(params.message);
         break;
       }
       default: {

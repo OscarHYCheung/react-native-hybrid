@@ -8,6 +8,7 @@ import com.facebook.react.ReactPackage
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.load
 import com.facebook.react.defaults.DefaultReactNativeHost
 import com.facebook.soloader.SoLoader
+import com.reactnativehybrid.ReactNativeModules.ReactNativeModulePackage
 
 class MainApplication : Application(), ReactApplication {
     private val mReactNativeHost: ReactNativeHost = object : DefaultReactNativeHost(this) {
@@ -15,11 +16,10 @@ class MainApplication : Application(), ReactApplication {
             return BuildConfig.DEBUG
         }
 
-        override fun getPackages(): List<ReactPackage> {
-            // Packages that cannot be autolinked yet can be added manually here, for example:
-            // packages.add(new MyReactNativePackage());
-            return PackageList(this).packages
-        }
+        override fun getPackages(): List<ReactPackage> =
+            PackageList(this).packages.apply {
+                add(ReactNativeModulePackage())
+            }
 
         override fun getJSMainModuleName(): String {
             return "index"
