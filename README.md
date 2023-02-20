@@ -21,6 +21,24 @@ Hybrid Android and iOS React Native app with WebView
 - In folder `ios`, run `pod install`
 - Back to project base folder, run `yarn ios` or `yarn android` to build the app
 
+## Message passing from WebView content to React Native
+
+The content of WebView can use `window.ReactNativeWebView.postMessage()` to send message, the message can only be a string. In the demo, the message is expected to be a JSON string:
+
+```json
+{
+  action: "open-url",
+  params: {
+    url: "https://reactnative.dev/"
+  }
+}
+```
+
+### Remarks
+
+- The method `window.ReactNativeWebView.postMessage` only got injected if the attribute `onMessage` is set in the `<WebView>`
+- The method `window.ReactNativeWebView.postMessage` cannot be stored to another variable, i.e. `const postMessage = window.ReactNativeWebView.postMessage; postMessage('SomeMessage');` will cause an error
+
 ## React Native modules
 
 React Native modules allow the React Native (JavaScript) to call the native modules (Java / Kotlin / Objective-C / Swift).
