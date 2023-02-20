@@ -8,7 +8,7 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "webview-content-server": "http-server ./webview-content/ -p8080 -c-1"
+    "serve-webview-content": "http-server ./webview-content/ -p8080 -c-1"
   },
   "dependencies": {
     "@react-navigation/native": "^6.1.4",
