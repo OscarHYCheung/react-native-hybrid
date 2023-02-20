@@ -8,7 +8,7 @@
 @objc(LoggerModule)
 class LoggerModule: NSObject {
   @objc
-  static func requiresMainQueueSetup() -> Bool { return true }
+  static func requiresMainQueueSetup() -> Bool { return false }
 
   @objc
   func log(_ message: String) -> Void {
