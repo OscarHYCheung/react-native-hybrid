@@ -50,6 +50,7 @@ React Native modules allow the React Native (JavaScript) to call the native modu
 - `LoggerModule.log(message: string)`: Has a parameter, no return, async
 - `RandomModule.rand()`: No parameter, has return with promise, async
 - `RandomModule.randSync()`: No parameter, has return, sync
+- `EventModule.triggerEvent()`: No parameter, no return, async, and will trigger an event if there are one or more listeners
 
 ### Create an Android React Native module
 

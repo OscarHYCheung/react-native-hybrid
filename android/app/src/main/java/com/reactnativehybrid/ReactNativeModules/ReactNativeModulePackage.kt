@@ -15,5 +15,6 @@ class ReactNativeModulePackage : ReactPackage {
         listOf(
             LoggerModule(reactContext),
             RandomModule(reactContext),
+            EventModule(reactContext),
         )
 }

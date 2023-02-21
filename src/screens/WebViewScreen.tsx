@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Linking, Platform, StyleSheet, Text, View } from 'react-native';
+import { Linking, NativeEventEmitter, Platform, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import DeviceInfo from 'react-native-device-info';
 import WebView from 'react-native-webview';
@@ -7,10 +7,10 @@ import WebView from 'react-native-webview';
 import BaseScreenProps from '../types/BaseScreenProps';
 
 import type { WebViewMessageEvent } from 'react-native-webview/lib/WebViewTypes';
+
 import LoggerModule from '../react-native-modules/LoggerModule';
 import RandomModule from '../react-native-modules/RandomModule';
-
-
+import EventModule from '../react-native-modules/EventModule';
 
 const WebViewScreen = ({ navigation }: BaseScreenProps): JSX.Element => {
   const [isLoading, setIsLoading] = useState(true);
@@ -28,6 +28,15 @@ const WebViewScreen = ({ navigation }: BaseScreenProps): JSX.Element => {
       }
       setWebViewUrl(url);
     });
+
+    const eventEmitter = new NativeEventEmitter(EventModule)
+    const { EVENT_NAME } = EventModule.getConstants();
+    const eventListener = eventEmitter.addListener(EVENT_NAME, (event) => {
+      console.log(event);
+    });
+    return () => {
+      eventListener.remove();
+    }
   }, []);
 
   const handleOnMessage = async (event: WebViewMessageEvent) => {
@@ -89,6 +98,10 @@ const WebViewScreen = ({ navigation }: BaseScreenProps): JSX.Element => {
         } catch (error) {
           console.error('Error occurred in rand:', error);
         }
+        break;
+      }
+      case 'trigger-event': {
+        EventModule.triggerEvent();
         break;
       }
       default: {
