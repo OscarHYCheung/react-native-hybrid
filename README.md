@@ -29,9 +29,9 @@ The content of WebView can use `window.ReactNativeWebView.postMessage()` to send
 
 ```json
 {
-  action: "open-url",
-  params: {
-    url: "https://reactnative.dev/"
+  "action": "open-url",
+  "params": {
+    "url": "https://reactnative.dev/"
   }
 }
 ```
