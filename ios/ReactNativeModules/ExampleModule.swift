@@ -7,10 +7,9 @@
 
 @objc(ExampleModule)
 class ExampleModule: NSObject {
-  @objc
   static func requiresMainQueueSetup() -> Bool { return false }
   
-  @objc(log:)
+  @objc
   func log(_ message: String) -> Void {
     print("LoggerModule:", message)
   }
@@ -31,8 +30,9 @@ class ExampleModule: NSObject {
   }
 
   @objc
-  func triggerEvent(_ eventName: String, eventParams: NSDictionary?) -> Void {
-    
+  func triggerEvent(_ eventName: String,
+                    params eventParams: NSDictionary?) -> Void {
+    EventEmitter.emitEventFromNative(eventName: eventName, eventParams: eventParams)
   }
   
 }

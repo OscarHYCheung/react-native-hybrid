@@ -6,7 +6,7 @@ interface EventInterface {
   getConstants(): {
     [EXAMPLE_EVENT_NAME: string]: string,
   },
-  emitEventFromReactNative(): void,
+  emitEventFromReactNative(eventName: string, eventParams?: any): void,
   addListener(): void,
   removeListeners(count: Number): void,
 }

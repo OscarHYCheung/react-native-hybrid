@@ -13,5 +13,7 @@
   RCT_EXTERN__BLOCKING_SYNCHRONOUS_METHOD(randSync)
   RCT_EXTERN_METHOD(rand: (RCTPromiseResolveBlock) resolve
                     rejecter: (RCTPromiseRejectBlock) reject)
+  RCT_EXTERN_METHOD(triggerEvent:(NSString *) eventName
+                    params: (NSDictionary *) eventParams)
 
 @end
