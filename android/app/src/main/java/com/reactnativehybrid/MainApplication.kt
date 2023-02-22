@@ -8,7 +8,7 @@ import com.facebook.react.ReactPackage
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.load
 import com.facebook.react.defaults.DefaultReactNativeHost
 import com.facebook.soloader.SoLoader
-import com.reactnativehybrid.ReactNativeModules.ReactNativeModulePackage
+import com.reactnativehybrid.reactnativemodules.ReactNativeModulePackage
 
 class MainApplication : Application(), ReactApplication {
     private val mReactNativeHost: ReactNativeHost = object : DefaultReactNativeHost(this) {

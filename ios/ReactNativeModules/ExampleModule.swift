@@ -1,14 +1,19 @@
 //
-//  RandomModule.swift
+//  ExampleModule.swift
 //  ReactNativeHybrid
 //
 //  Created by Oscar Cheung on 20/02/2023.
 //
 
-@objc(RandomModule)
-class RandomModule: NSObject {
+@objc(ExampleModule)
+class ExampleModule: NSObject {
   @objc
   static func requiresMainQueueSetup() -> Bool { return false }
+  
+  @objc(log:)
+  func log(_ message: String) -> Void {
+    print("LoggerModule:", message)
+  }
 
   @objc
   func randSync() -> [Float] {
@@ -25,4 +30,9 @@ class RandomModule: NSObject {
     }
   }
 
+  @objc
+  func triggerEvent(_ eventName: String, eventParams: NSDictionary?) -> Void {
+    
+  }
+  
 }

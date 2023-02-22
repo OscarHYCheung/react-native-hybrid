@@ -11,10 +11,8 @@
 		0C80B921A6F3F58F76C31292 /* libPods-ReactNativeHybrid.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-ReactNativeHybrid.a */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		5588C0F0299A4C1200D639EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5588C0EF299A4C1200D639EF /* AppDelegate.swift */; };
-		55AAC09029A35FE100EF7953 /* LoggerModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AAC08F29A35FE100EF7953 /* LoggerModule.swift */; };
-		55AAC09229A3621C00EF7953 /* LoggerModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AAC09129A3621C00EF7953 /* LoggerModule.m */; };
-		55AAC09429A3762C00EF7953 /* RandomModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AAC09329A3762C00EF7953 /* RandomModule.swift */; };
-		55AAC09629A3772800EF7953 /* RandomModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AAC09529A3772800EF7953 /* RandomModule.m */; };
+		55AAC09429A3762C00EF7953 /* ExampleModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AAC09329A3762C00EF7953 /* ExampleModule.swift */; };
+		55AAC09629A3772800EF7953 /* ExampleModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AAC09529A3772800EF7953 /* ExampleModule.m */; };
 		7699B88040F8A987B510C191 /* libPods-ReactNativeHybrid-ReactNativeHybridTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-ReactNativeHybrid-ReactNativeHybridTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -40,10 +38,8 @@
 		3B4392A12AC88292D35C810B /* Pods-ReactNativeHybrid.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeHybrid.debug.xcconfig"; path = "Target Support Files/Pods-ReactNativeHybrid/Pods-ReactNativeHybrid.debug.xcconfig"; sourceTree = "<group>"; };
 		5588C0EF299A4C1200D639EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5588C0F1299A4CE900D639EF /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
-		55AAC08F29A35FE100EF7953 /* LoggerModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerModule.swift; sourceTree = "<group>"; };
-		55AAC09129A3621C00EF7953 /* LoggerModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoggerModule.m; sourceTree = "<group>"; };
-		55AAC09329A3762C00EF7953 /* RandomModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomModule.swift; sourceTree = "<group>"; };
-		55AAC09529A3772800EF7953 /* RandomModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RandomModule.m; sourceTree = "<group>"; };
+		55AAC09329A3762C00EF7953 /* ExampleModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleModule.swift; sourceTree = "<group>"; };
+		55AAC09529A3772800EF7953 /* ExampleModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleModule.m; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-ReactNativeHybrid.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeHybrid.release.xcconfig"; path = "Target Support Files/Pods-ReactNativeHybrid/Pods-ReactNativeHybrid.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-ReactNativeHybrid-ReactNativeHybridTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeHybrid-ReactNativeHybridTests.debug.xcconfig"; path = "Target Support Files/Pods-ReactNativeHybrid-ReactNativeHybridTests/Pods-ReactNativeHybrid-ReactNativeHybridTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-ReactNativeHybrid.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ReactNativeHybrid.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,10 +111,8 @@
 		55AAC08E29A35FC000EF7953 /* ReactNativeModules */ = {
 			isa = PBXGroup;
 			children = (
-				55AAC08F29A35FE100EF7953 /* LoggerModule.swift */,
-				55AAC09129A3621C00EF7953 /* LoggerModule.m */,
-				55AAC09329A3762C00EF7953 /* RandomModule.swift */,
-				55AAC09529A3772800EF7953 /* RandomModule.m */,
+				55AAC09329A3762C00EF7953 /* ExampleModule.swift */,
+				55AAC09529A3772800EF7953 /* ExampleModule.m */,
 			);
 			path = ReactNativeModules;
 			sourceTree = "<group>";
@@ -429,11 +423,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55AAC09629A3772800EF7953 /* RandomModule.m in Sources */,
-				55AAC09429A3762C00EF7953 /* RandomModule.swift in Sources */,
-				55AAC09229A3621C00EF7953 /* LoggerModule.m in Sources */,
+				55AAC09629A3772800EF7953 /* ExampleModule.m in Sources */,
+				55AAC09429A3762C00EF7953 /* ExampleModule.swift in Sources */,
 				5588C0F0299A4C1200D639EF /* AppDelegate.swift in Sources */,
-				55AAC09029A35FE100EF7953 /* LoggerModule.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

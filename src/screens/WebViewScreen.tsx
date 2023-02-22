@@ -8,9 +8,9 @@ import BaseScreenProps from '../types/BaseScreenProps';
 
 import type { WebViewMessageEvent } from 'react-native-webview/lib/WebViewTypes';
 
-import LoggerModule from '../react-native-modules/LoggerModule';
-import RandomModule from '../react-native-modules/RandomModule';
-import EventModule from '../react-native-modules/EventModule';
+import RandomModule from '../react-native-modules/ExampleModule';
+import EventEmitter from '../react-native-modules/EventEmitter';
+import ExampleModule from '../react-native-modules/ExampleModule';
 
 const WebViewScreen = ({ navigation }: BaseScreenProps): JSX.Element => {
   const [isLoading, setIsLoading] = useState(true);
@@ -29,10 +29,10 @@ const WebViewScreen = ({ navigation }: BaseScreenProps): JSX.Element => {
       setWebViewUrl(url);
     });
 
-    const eventEmitter = new NativeEventEmitter(EventModule)
-    const { EVENT_NAME } = EventModule.getConstants();
-    const eventListener = eventEmitter.addListener(EVENT_NAME, (event) => {
-      console.log(event);
+    const eventEmitter = new NativeEventEmitter(EventEmitter);
+    const { EXAMPLE_EVENT_NAME } = EventEmitter.getConstants();
+    const eventListener = eventEmitter.addListener(EXAMPLE_EVENT_NAME, (event) => {
+      console.log('An event received: ', event);
     });
     return () => {
       eventListener.remove();
@@ -83,7 +83,7 @@ const WebViewScreen = ({ navigation }: BaseScreenProps): JSX.Element => {
           return;
         }
 
-        LoggerModule.log(params.message);
+        ExampleModule.log(params.message);
         break;
       }
       case 'rand-sync': {
@@ -101,7 +101,11 @@ const WebViewScreen = ({ navigation }: BaseScreenProps): JSX.Element => {
         break;
       }
       case 'trigger-event': {
-        EventModule.triggerEvent();
+        let { eventName, eventParams } = params;
+        if (typeof eventName !== 'string') {
+          return;
+        }
+        ExampleModule.triggerEvent(eventName, eventParams);
         break;
       }
       default: {

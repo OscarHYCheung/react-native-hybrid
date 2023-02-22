@@ -1,4 +1,4 @@
-package com.reactnativehybrid.ReactNativeModules
+package com.reactnativehybrid.reactnativemodules
 
 import android.view.View
 import com.facebook.react.ReactPackage
@@ -13,8 +13,7 @@ class ReactNativeModulePackage : ReactPackage {
 
     override fun createNativeModules(reactContext: ReactApplicationContext): List<ReactContextBaseJavaModule> =
         listOf(
-            LoggerModule(reactContext),
-            RandomModule(reactContext),
-            EventModule(reactContext),
+            ExampleModule(reactContext),
+            EventEmitter(reactContext),
         )
 }

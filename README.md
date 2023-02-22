@@ -36,10 +36,55 @@ The content of WebView can use `window.ReactNativeWebView.postMessage()` to send
 }
 ```
 
-### Remarks
+### Remarks of postMessage()
 
 - The method `window.ReactNativeWebView.postMessage` only got injected if the attribute `onMessage` is set in the `<WebView>`
 - The method `window.ReactNativeWebView.postMessage` cannot be stored to another variable, i.e. `const postMessage = window.ReactNativeWebView.postMessage; postMessage('SomeMessage');` will cause an error
+
+## Event handling between React Native (JavaScript) and native
+
+### Adding new event type
+
+- Add event name to `supportedEvents` and handling to `EventEmitter.swift` and `EventEmitter.kt`
+- Add event name to the interface in `EventEmitter.ts`
+
+### Emit from React Native (JavaScript)
+
+```javascript
+import { NativeModules } from 'react-native';
+
+const { EventEmitter } = NativeModule;
+const { EXAMPLE_EVENT_NAME } = EventEmitter.getConstants();
+const params = {
+  // Optional params
+  foo: 'bar',
+};
+EventEmitter.emitEventFromReactNative(EXAMPLE_EVENT_NAME, params);
+```
+
+### Emit from Android
+
+You can use `EventEmitter.emitEventFromNative()` and get available event names from `EventEmitter.Companion.SupportedEventNames`.
+Beware that you need to provide the `ReactContext` to the emitter. This implies that event emission can only happen inside a `ReactActivity` or a native module, but not in services. It makes sense because the JavaScript part only involved when the app is in foreground.
+
+```kotlin
+val targetEventName = EventEmitter.Companion.SupportedEventNames.EXAMPLE_EVENT_NAME
+val array = Arguments.createArray().apply {
+  pushInt(0)
+  pushInt(1)
+  pushInt(2)
+}
+val map = Arguments.createMap().apply {
+  putString("number", 1.23)
+}
+val params = Arguments.createMap().apply {
+  putString("eventName", eventName)
+  putString("foo", "bar")
+  putArray("array", array)
+  putMap("map", map)
+}
+EventEmitter.emitEventFromNative(reactContext, targetEventName, params)
+```
 
 ## React Native modules
 
@@ -47,10 +92,10 @@ React Native modules allow the React Native (JavaScript) to call the native modu
 
 ### React Native module examples
 
-- `LoggerModule.log(message: string)`: Has a parameter, no return, async
-- `RandomModule.rand()`: No parameter, has return with promise, async
-- `RandomModule.randSync()`: No parameter, has return, sync
-- `EventModule.triggerEvent()`: No parameter, no return, async, and will trigger an event if there are one or more listeners
+- `ExampleModule.log(message: string)`: Has a parameter, no return, async
+- `ExampleModule.rand()`: No parameter, has return with promise, async
+- `ExampleModule.randSync()`: No parameter, has return, sync
+- `ExampleModule.triggerEvent(eventMap: string, eventParams?: any)`: Has parameters, no return, async. Simulating triggering a event from native code.
 
 ### Create an Android React Native module
 
@@ -68,7 +113,7 @@ React Native modules allow the React Native (JavaScript) to call the native modu
 - Create a Objective-C file to map the Swift module to Objective-C
 - Create a TypeScript file in `src/react-native-modules` to export the module with interface, only one file need for both Android and iOS
 
-### Remarks
+### Remarks of React Native modules
 
 - Beware that limited support of types for parameters and returns, check <https://reactnative.dev/docs/native-modules-ios#argument-types> and <https://reactnative.dev/docs/native-modules-android#argument-types>
 - Beware when using synchronous methods, which are blocking
