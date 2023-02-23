@@ -78,12 +78,30 @@ val map = Arguments.createMap().apply {
   putString("number", 1.23)
 }
 val params = Arguments.createMap().apply {
-  putString("eventName", eventName)
+  putString("eventName", targetEventName)
   putString("foo", "bar")
   putArray("array", array)
   putMap("map", map)
 }
 EventEmitter.emitEventFromNative(reactContext, targetEventName, params)
+```
+
+### Emit from iOS
+
+Similar to Android, but with slightly different function signatures.
+
+```swift
+
+let targetEventName = EventEmitter.supportedEventMap.EXAMPLE_EVENT_NAME
+let array = [0, 1, 2]
+let map = ["number": 1.23]
+let params = [
+  "eventName": targetEventName,
+  "foo": "bar",
+  "array": array,
+  "map": map
+]
+EventEmitter.shared!.sendEvent(withName: eventName, body: eventParams)
 ```
 
 ## React Native modules
